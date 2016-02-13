@@ -2,9 +2,12 @@
 
 require __DIR__.'/../autoload.php';
 
-$controllerName = '\App\Controllers\\'.($_GET['ctrl'] ?: 'Admin\News');
+#echo 'админка';
+$path = str_replace('/admin', '', parse_url($_SERVER['REQUEST_URI'])['path']);
+$path_parts = array_filter(explode('/', $path));
+$action = array_pop($path_parts) ?: 'Index'; 
+$controllerName = '\App\Controllers\\'.(implode('\\', $path_parts) ?: 'Admin\News');
 $controller = new $controllerName();
-$action = $_GET['action'] ?: 'Index';
 $controller->action($action);
 
 ?>		

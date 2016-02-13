@@ -3,7 +3,7 @@
   <body>
     <?php include __DIR__.'/../header.html'; ?>
 
-	<form action="/admin/?ctrl=Admin\News&action=Save" method="post">
+	<form action="/admin/Admin/News/Save" method="post">
 	  <input type="hidden" name="id" value="<?php echo $article->id; ?>"/>
 	  <table>
         <tr>

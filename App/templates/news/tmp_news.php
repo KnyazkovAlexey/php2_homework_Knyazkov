@@ -7,7 +7,7 @@
 	<br>	
 	<?php foreach($articles as $article): ?>
 	    <br>
-        <a href="/?ctrl=News&action=One&id=<?php echo $article->id; ?>"><?php echo $article->title; ?></a>
+        <a href="/News/One/?id=<?php echo $article->id; ?>"><?php echo $article->title; ?></a>
 		<br>
 		<?php if(!empty($article->author)): ?>
 		  Автор: <?php echo $article->author->name; ?>

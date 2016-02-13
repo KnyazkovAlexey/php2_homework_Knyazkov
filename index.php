@@ -2,13 +2,13 @@
 
 require __DIR__.'/autoload.php';
 
-#$url = $_SERVER['REQUEST_URI'];
-#var_dump($url);die;
-
-$controllerName = '\App\Controllers\\'.($_GET['ctrl'] ?: 'News');
+$path = parse_url($_SERVER['REQUEST_URI'])['path'];
+$path_parts = array_filter(explode('/', $path));
+$actionName = array_pop($path_parts) ?: 'Index'; 
+$controllerName = '\App\Controllers\\'.(implode('\\', $path_parts) ?: 'News');
 #проверку сущ-я класса
 $controller = new $controllerName();
-$action = $_GET['action'] ?: 'Index';
+$action = $actionName ?: 'Index';
 $controller->action($action);
 
 ?>		
