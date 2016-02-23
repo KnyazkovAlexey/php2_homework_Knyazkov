@@ -48,6 +48,23 @@ class Article extends Model{
 	{
 		$this->author_id = $author->id;
 	}
+
+	/**
+	* Валидация свойств, используется перед сохранением модели
+	*/
+	public function validate()
+	{
+		$ex = new \App\MultiException();
+		if(trim($this->title) == ''){
+			$ex[] = new \Exception('Название не должно быть пустым!');
+		}		
+		if(trim($this->content) == ''){
+			$ex[] = new \Exception('Текст не должен быть пустым!');
+		}
+		if(count($ex)){
+			throw $ex;		
+		}
+	}	
 }
 
 ?>

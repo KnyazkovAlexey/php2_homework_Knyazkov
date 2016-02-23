@@ -2,6 +2,9 @@
 
 namespace App;
 
+/** 
+* Заготовка для классов, которые могут иметь только один объект
+*/
 trait Singleton{
 
 	protected static $instance;

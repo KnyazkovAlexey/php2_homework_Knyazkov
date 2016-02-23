@@ -23,28 +23,28 @@ abstract class Model {
 	/**
 	* Метод возвращает запись по указанному id в виде объекта соответствующего класса, либо false, если запись не найдена 
 	*/		
-	public static function findById(int $id){
+	public static function findById($id){
 		$db = \App\Db::instance();
         $res = $db->query(
             'SELECT * FROM '.static::TABLE.' WHERE id=:id',
 	        static::class,
-			[':id' => $id]
+			[':id' => (int)$id]
         );
 		if ($res){
 			return $res[0];
 		}
 		else {
-			return false;
+			throw new \App\Exceptions\ObjectNotFound('Запрашиваемый объект не найден');
 		}
 	}
 
 	/**
 	* @return array Требуемое количество последних записей таблицы TABLE в виде списка объектов соответствующего класса
 	*/		
-	public static function findLast(int $count){
+	public static function findLast($count){
 		$db = \App\Db::instance();
         return $db->query(
-            'SELECT * FROM '.static::TABLE.' ORDER BY id DESC LIMIT 0, '.$count,
+            'SELECT * FROM '.static::TABLE.' ORDER BY id DESC LIMIT 0, '.(int)$count,
 	        static::class
         );
 	}
@@ -104,11 +104,13 @@ abstract class Model {
 	/**
 	* Метод обновляет запись в БД, либо создаёт её, если она новая 
 	*/
-    public function save()
-    {
+    public function save(){
 		if ($this->isDeleted()){
 			return false;
 		}
+		if(method_exists($this, 'validate')) {
+            $this->validate();
+        }
         if ($this->isNew()) {
             $res = $this->insert();
         } else {
@@ -117,8 +119,7 @@ abstract class Model {
         return $res;
     }
 	
-    public function delete()
-    {
+    public function delete(){
 		if ($this->isNew() || $this->isDeleted()){
 			return false;
 		}
@@ -130,6 +131,26 @@ abstract class Model {
 			$this->isDeleted = true;
 		}
         return $res;
-    }		
+    }
+
+	public function giveOne($id){
+        if (!empty($id)){
+            return static::findById($id);	
+        }
+        else {	
+	        return new static();
+        }
+	}
+	
+    public function fill(array $properties){
+		foreach($this as $k => $v){
+			if(in_array($k, ['id', 'isDeleted'])){
+				continue;
+			}
+            if(in_array($k, array_keys($properties))){
+				$this->{$k} = $properties[$k];
+			}			
+		}
+	}	
 }
 

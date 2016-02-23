@@ -4,5 +4,5 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-l
 
-RewriteRule ^admin admin/index.php [QSA,L]
-RewriteRule !^admin index.php [QSA,L]
+RewriteRule !^admin.* index.php [QSA,L]
+RewriteRule ^admin.* admin/index.php [QSA,L]

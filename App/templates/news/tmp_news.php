@@ -13,6 +13,7 @@
 		  Автор: <?php echo $article->author->name; ?>
 	    <?php endif; ?>
 	    <hr>
-    <?php endforeach; ?>	
+    <?php endforeach; ?>
+    <?php if(!$articles){echo 'список пуст';} ?>		
   </body>
 </html>	

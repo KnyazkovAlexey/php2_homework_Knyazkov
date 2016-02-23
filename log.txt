@@ -1,0 +1,2 @@
+2016-02-21 13:15:58 App\Exceptions\Db Нет соединения с БД C:\OpenServer\domains\php2.local\App\Db.php строка 21
+2016-02-21 13:17:03 App\Exceptions\ObjectNotFound Запрашиваемый объект не найден C:\OpenServer\domains\php2.local\App\Models\Model.php строка 37

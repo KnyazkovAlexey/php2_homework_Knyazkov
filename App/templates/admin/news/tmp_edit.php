@@ -2,8 +2,15 @@
 <html>
   <body>
     <?php include __DIR__.'/../header.html'; ?>
-
-	<form action="/admin/Admin/News/Save" method="post">
+	<?php if($errors): ?>
+	    <?php foreach($errors as $error): ?>
+          <div style="background-color:red; color:white;">
+	        <?php echo $error->getMessage(); ?>
+	      </div>
+		  <br>
+        <?php endforeach; ?>
+    <?php endif; ?>
+	<form action="/admin/News/Save" method="post">
 	  <input type="hidden" name="id" value="<?php echo $article->id; ?>"/>
 	  <table>
         <tr>

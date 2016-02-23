@@ -2,6 +2,9 @@
 
 namespace App;
 
+/** 
+* Конфигурация приложения
+*/
 class Config{
 
 	use Singleton;
@@ -12,7 +15,10 @@ class Config{
 		    'dbname' => 'test',
 		    'username' => 'root',
 		    'password' => ''
-        ]	
+        ],
+	    'log' => [
+	        'file' => __DIR__.'/../log.txt'		
+        ]		
 	];
 }
 

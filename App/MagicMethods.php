@@ -2,6 +2,9 @@
 
 namespace App;
 
+/** 
+* Используется для работы с недоступными свойствами объектов
+*/
 trait MagicMethods{
 
     protected $data = [];
