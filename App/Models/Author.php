@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
-class Author extends Model{
-
+/**
+* Модель для авторов новостей
+*/
+class Author extends Model
+{
     const TABLE = 'authors';
-	
-	public $name;
+
+    public $name = null;
 }
 
-?>

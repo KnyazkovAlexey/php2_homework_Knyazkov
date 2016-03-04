@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Admin;
 
 /**
 * Базовый класс контроллеров
@@ -14,7 +14,7 @@ abstract class Controller
     */
     public function __construct()
     {
-        $this->view = new \App\Views\View();
+        $this->view = new \App\Views\Admin\View();
     }
 
     /**

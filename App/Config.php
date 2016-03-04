@@ -5,8 +5,8 @@ namespace App;
 /** 
 * Конфигурация приложения
 */
-class Config{
-
+class Config
+{
 	use Singleton;
 
     public $data = [
@@ -18,8 +18,10 @@ class Config{
         ],
 	    'log' => [
 	        'file' => __DIR__.'/../log.txt'		
+        ],
+	    'templates' => [
+	        'dir' => __DIR__.'/templates/'		
         ]		
 	];
 }
 
-?>

@@ -1,19 +1,18 @@
-<!DOCTYPE HTML>
-<html>
-  <body>
-    <?php include __DIR__.'/../header.html'; ?> 
+{% extends 'header.html' %}
+{% block content %}
 	<br>
 	<b>Новости:</b>
 	<br>	
-	<?php foreach($articles as $article): ?>
+    {% for article in articles %}
 	    <br>
-        <a href="/News/One/?id=<?php echo $article->id; ?>"><?php echo $article->title; ?></a>
+        <a href="/News/One/?id={{ article.id }}">{{ article.title }}</a>
 		<br>
-		<?php if(!empty($article->author)): ?>
-		  Автор: <?php echo $article->author->name; ?>
-	    <?php endif; ?>
+		{% if article.author %}
+		  Автор: {{ article.author.name }}
+        {% endif %}	
 	    <hr>
-    <?php endforeach; ?>
-    <?php if(!$articles){echo 'список пуст';} ?>		
-  </body>
-</html>	
+    {% else %}	
+        список пуст    	
+    {% endfor %}	
+{% endblock %}
+

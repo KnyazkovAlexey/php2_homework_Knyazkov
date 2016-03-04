@@ -1,13 +1,10 @@
-<!DOCTYPE HTML>
-<html>
-  <body>
-    <?php include __DIR__.'/../header.html'; ?>  
-	<b>Название: <?php echo $article->title; ?></b>
+{% extends 'header.html' %}
+{% block content %}
+	<b>Название: {{ article.title }}</b>
 	<br><hr>
-	<?php echo nl2br($article->content); ?>
+	{{ article.content|nl2br }}
 	<br><hr>
-    <?php if(!empty($article->author)): ?>
-	    Автор: <?php echo $article->author->name; ?>
-	<?php endif; ?>
-  </body>
-</html>	
+	{% if article.author %}
+	    Автор: {{ article.author.name }}
+    {% endif %}		
+{% endblock %}

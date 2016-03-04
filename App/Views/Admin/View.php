@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Views;
+namespace App\Views\Admin;
 
 /**
 * Класс для работы с представлениями
@@ -8,8 +8,6 @@ namespace App\Views;
 class View extends \App\Views\BaseView
 {
     use \App\MagicMethods;	
-
-	protected $twig = null;
 
 	/**
 	* Подключение шаблонизатора Twig
@@ -21,14 +19,20 @@ class View extends \App\Views\BaseView
         $loader = new \Twig_Loader_Filesystem($templates_dir);
         $this->twig = new \Twig_Environment($loader);
     }
-
+	
 	/**
 	* Метод подготавливает шаблон, заполняя его серверными данными
 	*/
     public function render($template)
     {
-	    $template = $this->twig->loadTemplate($template);
-		return $template->render($this->data);
-    }
+        ob_start();
+        foreach ($this->data as $property => $value) {
+            $$property = $value;
+        }
+        include $template;
+        $content = ob_get_contents();
+        ob_end_clean();
+        return $content;
+    }	
 }
 

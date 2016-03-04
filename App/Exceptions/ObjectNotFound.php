@@ -2,8 +2,8 @@
 
 namespace App\Exceptions;
 
-class ObjectNotFound extends \Exception{
+class ObjectNotFound extends \Exception
+{
 
 }
 
-?>

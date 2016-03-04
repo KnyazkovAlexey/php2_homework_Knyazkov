@@ -5,20 +5,24 @@ namespace App;
 /** 
 * Заготовка для классов, которые могут иметь только один объект
 */
-trait Singleton{
-
-	protected static $instance;
+trait Singleton
+{
+    protected static $instance = null;
 	
-	protected function __construct(){
+    protected function __construct()
+    {
 		
-	}
+    }
 	
-    public static function instance(){
-		if(null === static::$instance){
-			static::$instance = new static;
-		}
-		return static::$instance;
-	}	
+    /** 
+    * Возвращает новый объект, либо уже существующий, если он есть
+    */	
+    public static function instance()
+    {
+        if (null === static::$instance) {
+            static::$instance = new static;
+        }
+        return static::$instance;
+    }	
 }
 
-?>

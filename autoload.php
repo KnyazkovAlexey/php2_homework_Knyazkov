@@ -1,10 +1,10 @@
 <?php
 
-function __autoload ($className){ 
-    $path = __DIR__.'/'.str_replace('\\', '/', $className).'.php';
-	if(file_exists($path)){
-		require $path;
-		return true;
+spl_autoload_register(function($className){ 
+    $filename = __DIR__.'/'.str_replace('\\', '/', $className).'.php';
+	if (file_exists($filename)) {
+		include $filename;
 	}
-	return false;
-}
+});
+
+include __DIR__.'/vendor/autoload.php';
