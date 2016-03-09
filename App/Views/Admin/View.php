@@ -7,8 +7,6 @@ namespace App\Views\Admin;
 */
 class View extends \App\Views\BaseView
 {
-    use \App\MagicMethods;	
-
 	/**
 	* Подключение шаблонизатора Twig
 	*/	

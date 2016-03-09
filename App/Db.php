@@ -54,6 +54,22 @@ class Db
         }
         return $sth->fetchAll(\PDO::FETCH_CLASS, $className);
     }
+	
+    /** 
+    * Копия метода query, которая не возвращает массив целиком, а генерирует запись за записью
+    */		
+    public function queryEach($sql, $className, array $data=[])
+    {
+        $sth = $this->dbh->prepare($sql);
+        $sth->setFetchMode(\PDO::FETCH_CLASS, $className);		
+        $res = $sth->execute($data);
+        if (!$res) {
+            throw new \App\Exceptions\Db('Ошибка запроса в БД');						
+        }
+        while ($record = $sth->fetch()) {
+            yield $record;
+        }
+    }	
 
     /** 
     * Возвращает id последней вставленной записи

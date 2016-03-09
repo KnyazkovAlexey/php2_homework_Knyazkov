@@ -7,8 +7,6 @@ namespace App\Views;
 */
 class View extends \App\Views\BaseView
 {
-    use \App\MagicMethods;	
-
 	protected $twig = null;
 
 	/**

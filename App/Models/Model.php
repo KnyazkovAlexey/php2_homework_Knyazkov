@@ -42,12 +42,12 @@ abstract class Model
     }
 
     /**
-    * Метод возвращает требуемое количество последних записей таблицы TABLE в виде списка объектов соответствующего класса
+    * Метод возвращает требуемое количество последних записей таблицы TABLE в виде генератора объектов соответствующего класса
     */		
     public static function findLast($count)
     {
         $db = \App\Db::instance();
-        return $db->query(
+        return $db->queryEach(
             'SELECT * FROM '.static::TABLE.' ORDER BY id DESC LIMIT 0, '.(int)$count,
 	        static::class
         );

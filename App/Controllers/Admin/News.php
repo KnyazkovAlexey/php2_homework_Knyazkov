@@ -21,8 +21,23 @@ class News extends \App\Controllers\Admin\Controller
     */	
     protected function actionList()
     {
-        $this->view->articles = \App\Models\Article::findLast(4);			
-        $this->view->display(__DIR__.'/../../templates/admin/news/tmp_news.php');
+		$articles = \App\Models\Article::findLast(4);
+        $functions = [
+		    function($model){ 
+                return '<a href="/admin/News/Edit?id='.$model->id.'">'.$model->id.'</a>';
+            },
+		    function($model){ 
+                return $model->title;
+            },
+		    function($model){ 
+                return $model->author->name;
+            },
+		    function($model){ 
+                return '<a href="/admin/News/Delete?id='.$model->id.'">Удалить</a>';
+            }			
+		];		
+		$this->view->table = (new \App\AdminDataTable($articles, $functions))->render();
+        $this->view->display(__DIR__.'/../../templates/admin/news/tmp_news.php');		
     }
 
     /**
